@@ -1,0 +1,367 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="description" content="Protótipo acadêmico (UNISC) de um portal de serviços públicos. Não é o site oficial do gov.br.">
+  <meta name="theme-color" content="#1351B4">
+  <title>Início – Portal de Serviços (protótipo)</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/dados.js"></script>
+  <script src="js/app.js"></script>
+</head>
+<body>
+  <a class="pular" href="#conteudo" data-pular>Pular para o conteúdo</a>
+
+  <div class="aviso-prototipo" role="note">
+    <p class="container">Protótipo acadêmico – UNISC. Este não é o site oficial do gov.br.</p>
+  </div>
+
+  <header class="cabecalho">
+    <div class="container cabecalho__linha">
+      <a class="marca" href="#inicio">Portal de Serviços <span class="marca__nota">(protótipo)</span></a>
+
+      <div class="sessao" data-sessao hidden>
+        <span>Você entrou como <strong data-sessao-nome></strong></span>
+        <button class="botao-link" type="button" data-sair>Sair</button>
+      </div>
+
+      <div class="acessibilidade">
+        <div class="acessibilidade__fonte" role="group" aria-labelledby="acessibilidade-titulo">
+          <span class="acessibilidade__titulo" id="acessibilidade-titulo">Tamanho da letra</span>
+          <span class="acessibilidade__controles">
+            <button class="acessibilidade__botao" type="button" data-fonte-acao="menos" aria-label="A− diminuir a letra">A−</button>
+            <output class="acessibilidade__valor" data-fonte-valor>100%</output>
+            <button class="acessibilidade__botao" type="button" data-fonte-acao="mais" aria-label="A+ aumentar a letra">A+</button>
+          </span>
+        </div>
+        <button class="acessibilidade__botao" type="button" data-contraste aria-pressed="false">Alto contraste</button>
+      </div>
+    </div>
+  </header>
+
+  <noscript>
+    <p class="container aviso-sem-js">Este protótipo precisa do JavaScript ligado no navegador para funcionar.</p>
+  </noscript>
+
+  <main class="container conteudo" id="conteudo" tabindex="-1">
+
+    <!-- Início -->
+    <section class="tela" id="tela-inicio" data-tela="inicio" data-titulo="Início" aria-labelledby="inicio-titulo">
+      <div class="inicio">
+        <h1 class="tela__titulo inicio__titulo" id="inicio-titulo" tabindex="-1">Olá! Como podemos ajudar?</h1>
+
+        <form class="busca busca--grande" data-busca role="search" action="#busca" novalidate>
+          <div class="campo">
+            <label class="campo__rotulo" for="busca-inicio-campo">Escreva o que você precisa</label>
+            <p class="campo__dica" id="busca-inicio-dica">Pode ser com as suas palavras. Por exemplo: renovar carteira de motorista.</p>
+            <p class="campo__erro" id="busca-inicio-erro" data-busca-erro aria-live="polite"></p>
+            <div class="busca__linha">
+              <div class="busca__caixa">
+                <input class="busca__campo" id="busca-inicio-campo" name="q" type="search"
+                       placeholder="O que você precisa resolver?"
+                       autocomplete="off" enterkeyhint="search"
+                       role="combobox" aria-autocomplete="list" aria-expanded="false"
+                       aria-controls="busca-inicio-lista"
+                       aria-describedby="busca-inicio-dica busca-inicio-erro"
+                       data-busca-campo>
+                <ul class="busca__lista" id="busca-inicio-lista" role="listbox" aria-label="Sugestões" data-busca-lista hidden></ul>
+              </div>
+              <button class="botao botao--busca" type="submit">
+                <svg class="icone" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/></svg>
+                Buscar
+              </button>
+            </div>
+            <p class="visualmente-oculto" data-busca-status aria-live="polite"></p>
+          </div>
+        </form>
+      </div>
+
+      <section class="mais-procurados" aria-labelledby="mais-procurados-titulo">
+        <h2 id="mais-procurados-titulo">Serviços mais procurados</h2>
+        <ul class="servicos" data-mais-procurados></ul>
+      </section>
+    </section>
+
+    <!-- Resultado da busca -->
+    <section class="tela" id="tela-busca" data-tela="busca" data-titulo="Resultado da busca" aria-labelledby="busca-titulo" hidden>
+      <p><a class="voltar" href="#inicio">Voltar para o início</a></p>
+      <h1 class="tela__titulo" id="busca-titulo" tabindex="-1" data-busca-titulo>Resultado da busca</h1>
+      <p class="busca-termo" data-busca-termo></p>
+
+      <div data-busca-resultados></div>
+
+      <form class="busca busca--refinar" data-busca role="search" action="#busca" novalidate>
+        <div class="campo">
+          <h2 class="campo__titulo"><label for="busca-pagina-campo">Buscar outra coisa</label></h2>
+          <p class="campo__erro" id="busca-pagina-erro" data-busca-erro aria-live="polite"></p>
+          <div class="busca__linha">
+            <div class="busca__caixa">
+              <input class="busca__campo" id="busca-pagina-campo" name="q" type="search"
+                     placeholder="O que você precisa resolver?"
+                     autocomplete="off" enterkeyhint="search"
+                     role="combobox" aria-autocomplete="list" aria-expanded="false"
+                     aria-controls="busca-pagina-lista"
+                     aria-describedby="busca-pagina-erro"
+                     data-busca-campo>
+              <ul class="busca__lista" id="busca-pagina-lista" role="listbox" aria-label="Sugestões" data-busca-lista hidden></ul>
+            </div>
+            <button class="botao botao--busca" type="submit">
+              <svg class="icone" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/></svg>
+              Buscar
+            </button>
+          </div>
+          <p class="visualmente-oculto" data-busca-status aria-live="polite"></p>
+        </div>
+      </form>
+    </section>
+
+    <!-- Serviço que não faz parte do protótipo -->
+    <section class="tela" id="tela-indisponivel" data-tela="indisponivel" data-titulo="Serviço fora do protótipo" aria-labelledby="indisponivel-titulo" hidden>
+      <p><a class="voltar" href="#inicio">Voltar para o início</a></p>
+      <h1 class="tela__titulo" id="indisponivel-titulo" tabindex="-1">Este serviço não faz parte do protótipo</h1>
+      <p class="destaque" data-indisponivel-servico></p>
+      <p>Este protótipo mostra um serviço completo: a renovação da carteira de motorista. Os outros aparecem só para a página ficar parecida com um portal de verdade.</p>
+      <div class="acoes">
+        <a class="botao" href="#servico">Ver a renovação da carteira de motorista</a>
+        <a class="botao botao--secundario" href="#inicio">Voltar para o início</a>
+      </div>
+    </section>
+
+    <!-- Página do serviço (padrão GOV.UK). Conteúdo vem de dados.js -->
+    <section class="tela" id="tela-servico" data-tela="servico" data-titulo="Renovar a carteira de motorista" aria-labelledby="servico-titulo" hidden>
+      <p><a class="voltar" href="#inicio">Voltar para o início</a></p>
+      <h1 class="tela__titulo" id="servico-titulo" tabindex="-1">Renovar a carteira de motorista (CNH)</h1>
+      <p class="lide" data-servico-resumo></p>
+      <p class="destaque">Os valores e prazos desta página são de exemplo. Este é um protótipo.</p>
+
+      <section class="secao" aria-labelledby="servico-o-que-e">
+        <h2 id="servico-o-que-e">O que é</h2>
+        <div data-servico-parte="oQueE"></div>
+      </section>
+
+      <section class="secao" aria-labelledby="servico-quem-pode">
+        <h2 id="servico-quem-pode">Quem pode pedir</h2>
+        <div data-servico-parte="quemPode"></div>
+      </section>
+
+      <section class="secao" aria-labelledby="servico-custo">
+        <h2 id="servico-custo">Quanto custa</h2>
+        <div data-servico-parte="custo"></div>
+      </section>
+
+      <section class="secao" aria-labelledby="servico-prazo">
+        <h2 id="servico-prazo">Quanto tempo demora</h2>
+        <div data-servico-parte="prazo"></div>
+      </section>
+
+      <section class="secao" aria-labelledby="servico-documentos">
+        <h2 id="servico-documentos">O que você precisa ter em mãos</h2>
+        <div data-servico-parte="documentos"></div>
+      </section>
+
+      <section class="secao" aria-labelledby="servico-passos">
+        <h2 id="servico-passos">Passo a passo</h2>
+        <div data-servico-parte="passos"></div>
+      </section>
+
+      <div class="comecar">
+        <a class="botao botao--comecar" href="#entrar" data-comecar>
+          Começar agora
+          <svg class="icone" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <p class="comecar__nota" data-comecar-nota>Você vai precisar entrar com a sua conta.</p>
+      </div>
+    </section>
+
+    <!-- Entrar: escolha da forma de entrar -->
+    <section class="tela" id="tela-entrar" data-tela="entrar" data-titulo="Entrar na sua conta" aria-labelledby="entrar-titulo" hidden>
+      <p><a class="voltar" href="#servico">Voltar</a></p>
+      <h1 class="tela__titulo" id="entrar-titulo" tabindex="-1">Entre na sua conta</h1>
+      <p class="lide">Entrar serve para o governo ter certeza de que é você mesmo fazendo o pedido.</p>
+
+      <h2>Escolha como você quer entrar</h2>
+      <ul class="opcoes-login" data-opcoes-login></ul>
+
+      <div class="painel-simulado" data-painel-simulado hidden>
+        <h2 class="painel-simulado__titulo" tabindex="-1" data-painel-simulado-titulo></h2>
+        <p>Neste protótipo, esta forma de entrar é simulada. Na versão de verdade, você confirmaria quem é <span data-painel-simulado-como></span>.</p>
+        <div class="acoes">
+          <button class="botao" type="button" data-entrar-simulado>Continuar como Carlos</button>
+          <button class="botao botao--secundario" type="button" data-fechar-simulado>Escolher outra forma</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Entrar com CPF e senha -->
+    <section class="tela" id="tela-entrar-senha" data-tela="entrar-senha" data-titulo="Entrar com CPF e senha" aria-labelledby="entrar-senha-titulo" hidden>
+      <p><a class="voltar" href="#entrar">Voltar</a></p>
+
+      <div class="resumo-erros" data-resumo-erros tabindex="-1" hidden>
+        <h2 class="resumo-erros__titulo">Corrija estes pontos</h2>
+        <ul class="resumo-erros__lista"></ul>
+      </div>
+
+      <h1 class="tela__titulo" id="entrar-senha-titulo" tabindex="-1">Entrar com CPF e senha</h1>
+
+      <form class="formulario" data-form-login novalidate>
+        <div class="campo">
+          <label class="campo__rotulo" for="login-cpf">CPF</label>
+          <p class="campo__dica" id="login-cpf-dica">São os 11 números do seu CPF. Pode digitar com ou sem pontos.</p>
+          <p class="campo__erro" id="login-cpf-erro" aria-live="polite"></p>
+          <input class="campo__entrada campo__entrada--cpf" id="login-cpf" name="cpf" type="text"
+                 inputmode="numeric" autocomplete="username" spellcheck="false"
+                 aria-describedby="login-cpf-dica login-cpf-erro" data-cpf>
+        </div>
+
+        <div class="campo">
+          <label class="campo__rotulo" for="login-senha">Senha</label>
+          <p class="campo__erro" id="login-senha-erro" aria-live="polite"></p>
+          <div class="senha">
+            <input class="campo__entrada senha__campo" id="login-senha" name="senha" type="password"
+                   autocomplete="current-password"
+                   aria-describedby="login-senha-erro">
+            <button class="botao botao--secundario senha__mostrar" type="button" aria-controls="login-senha" data-mostrar-senha>Mostrar senha</button>
+          </div>
+        </div>
+
+        <div class="esqueci">
+          <a class="esqueci__link" href="#esqueci-senha" aria-describedby="esqueci-ajuda">Esqueci minha senha</a>
+          <p class="esqueci__ajuda" id="esqueci-ajuda">Sem problema. Você cria uma senha nova usando o seu CPF e o seu celular.</p>
+        </div>
+
+        <button class="botao botao--enviar" type="submit">Entrar</button>
+      </form>
+
+      <aside class="caixa-teste" aria-labelledby="teste-titulo">
+        <h2 id="teste-titulo">Para testar o protótipo</h2>
+        <p>Use o CPF <strong data-cpf-teste></strong> e qualquer senha.</p>
+      </aside>
+    </section>
+
+    <!-- Esqueci minha senha -->
+    <section class="tela" id="tela-esqueci-senha" data-tela="esqueci-senha" data-titulo="Criar uma senha nova" aria-labelledby="esqueci-titulo" hidden>
+      <p><a class="voltar" href="#entrar-senha">Voltar</a></p>
+
+      <div class="resumo-erros" data-resumo-erros tabindex="-1" hidden>
+        <h2 class="resumo-erros__titulo">Corrija estes pontos</h2>
+        <ul class="resumo-erros__lista"></ul>
+      </div>
+
+      <h1 class="tela__titulo" id="esqueci-titulo" tabindex="-1">Criar uma senha nova</h1>
+
+      <form class="formulario" data-form-esqueci novalidate>
+        <p class="lide">Digite o seu CPF. Vamos mandar uma mensagem para o seu celular com o caminho para criar a senha nova.</p>
+        <div class="campo">
+          <label class="campo__rotulo" for="esqueci-cpf">CPF</label>
+          <p class="campo__dica" id="esqueci-cpf-dica">São os 11 números do seu CPF. Pode digitar com ou sem pontos.</p>
+          <p class="campo__erro" id="esqueci-cpf-erro" aria-live="polite"></p>
+          <input class="campo__entrada campo__entrada--cpf" id="esqueci-cpf" name="cpf" type="text"
+                 inputmode="numeric" autocomplete="username" spellcheck="false"
+                 aria-describedby="esqueci-cpf-dica esqueci-cpf-erro" data-cpf>
+        </div>
+        <button class="botao botao--enviar" type="submit">Enviar mensagem</button>
+      </form>
+
+      <div aria-live="polite">
+        <div class="sucesso" data-esqueci-sucesso hidden>
+          <h2 class="sucesso__titulo" tabindex="-1">Pronto, mensagem enviada</h2>
+          <p>Mandamos um SMS para o celular terminado em <strong data-celular-final></strong> (exemplo). Abra a mensagem e siga o link para criar a senha nova.</p>
+          <p>A mensagem pode levar alguns minutos para chegar.</p>
+          <div class="acoes">
+            <a class="botao botao--secundario" href="#entrar-senha">Voltar para entrar</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Formulário: uma pergunta por tela (#etapa-1 a #etapa-4). A pergunta vem de dados.js -->
+    <section class="tela" id="tela-etapa" data-tela="etapa" data-titulo="Pedido" aria-labelledby="etapa-pergunta" hidden>
+      <p><a class="voltar" href="#servico" data-etapa-voltar>Voltar</a></p>
+
+      <div class="resumo-erros" data-resumo-erros tabindex="-1" hidden>
+        <h2 class="resumo-erros__titulo">Corrija estes pontos</h2>
+        <ul class="resumo-erros__lista"></ul>
+      </div>
+
+      <div class="progresso" data-etapa-numero="1">
+        <p class="progresso__texto" data-etapa-progresso>Etapa 1 de 4</p>
+        <div class="progresso__barra" aria-hidden="true"><span class="progresso__preenchido"></span></div>
+      </div>
+
+      <form class="formulario" data-form-etapa novalidate>
+        <div data-etapa-campo></div>
+        <button class="botao botao--enviar" type="submit">Continuar</button>
+      </form>
+    </section>
+
+    <!-- Revisão antes de enviar -->
+    <section class="tela" id="tela-revisar" data-tela="revisar" data-titulo="Confira suas respostas" aria-labelledby="revisar-titulo" hidden>
+      <p><a class="voltar" href="#etapa-4">Voltar</a></p>
+      <h1 class="tela__titulo" id="revisar-titulo" tabindex="-1">Confira suas respostas antes de enviar</h1>
+      <p>Se alguma coisa estiver errada, aperte “Mudar” ao lado dela.</p>
+
+      <dl class="revisao" data-revisao></dl>
+
+      <h2>Agora é só enviar</h2>
+      <p>Ao enviar, você confirma que as respostas estão certas.</p>
+      <p>Depois de enviar, você paga <strong data-revisar-total></strong> (valor de exemplo).</p>
+      <form data-form-enviar novalidate>
+        <button class="botao botao--enviar" type="submit">Enviar pedido</button>
+      </form>
+    </section>
+
+    <!-- Confirmação -->
+    <section class="tela" id="tela-confirmacao" data-tela="confirmacao" data-titulo="Pedido enviado" aria-labelledby="confirmacao-titulo" hidden>
+      <div class="painel-sucesso">
+        <h1 class="painel-sucesso__titulo" id="confirmacao-titulo" tabindex="-1">Pedido enviado</h1>
+        <p class="painel-sucesso__protocolo">Número do protocolo <strong data-protocolo></strong></p>
+        <p class="painel-sucesso__data" data-enviado-em></p>
+      </div>
+
+      <p>Guarde este número. Ele serve para acompanhar o pedido.</p>
+      <div class="acoes acoes--confirmacao">
+        <a class="botao" href="#" target="_blank" rel="noopener" data-whatsapp>Compartilhar no WhatsApp</a>
+        <button class="botao botao--secundario" type="button" data-copiar>Copiar número do protocolo</button>
+      </div>
+      <p class="campo__dica">O botão do WhatsApp abre o aplicativo para você escolher com quem compartilhar.</p>
+      <p class="aviso-copiar" data-copiar-aviso aria-live="polite"></p>
+
+      <section class="secao" aria-labelledby="proximos-titulo">
+        <h2 id="proximos-titulo">O que acontece agora</h2>
+        <ol class="passos" role="list" data-proximos></ol>
+      </section>
+
+      <section class="secao" aria-labelledby="prazos-titulo">
+        <h2 id="prazos-titulo">Quanto tempo demora</h2>
+        <ul data-prazos></ul>
+      </section>
+
+      <div class="acoes">
+        <a class="botao botao--secundario" href="#inicio">Voltar para o início</a>
+      </div>
+    </section>
+
+    <!-- Rota que não existe -->
+    <section class="tela" id="tela-nao-encontrada" data-tela="nao-encontrada" data-titulo="Página não encontrada" aria-labelledby="nao-encontrada-titulo" hidden>
+      <h1 class="tela__titulo" id="nao-encontrada-titulo" tabindex="-1">Não encontramos esta página</h1>
+      <p>O endereço pode estar errado ou a página mudou de lugar.</p>
+      <div class="acoes">
+        <a class="botao" href="#inicio">Ir para o início</a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="rodape">
+    <div class="container">
+      <p>Protótipo acadêmico feito para a disciplina Experiência do Usuário e Storytelling, da UNISC.</p>
+      <p>Os serviços, valores e prazos são de exemplo. Este site não tem ligação com o gov.br nem com nenhum órgão do governo.</p>
+    </div>
+  </footer>
+
+  <p class="visualmente-oculto" id="aviso-global" aria-live="polite"></p>
+</body>
+</html>
